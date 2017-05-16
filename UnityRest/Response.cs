@@ -1,6 +1,6 @@
 ﻿namespace UnityRest
 {
-    public class RestClient
+    class Response
     {
     }
 }
