@@ -1,6 +1,6 @@
 ﻿namespace UnityRest
 {
-    enum Method
+    public enum Method
     {
         GET,
         POST

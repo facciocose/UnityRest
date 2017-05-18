@@ -1,6 +1,12 @@
 ﻿namespace UnityRest
 {
-    class Response
+    public class Response
     {
+        public string data;
+
+        public Response(string data)
+        {
+            this.data = data;
+        }
     }
 }
