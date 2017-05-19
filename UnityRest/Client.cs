@@ -1,6 +1,7 @@
 ﻿using RSG;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityRest
@@ -26,8 +27,29 @@ namespace UnityRest
 
         IEnumerator ExecuteEnum(Request request, Action<Response, Exception> done)
         {
-            //www = new WWW(BaseUrl + request.ToString(), null, request.headers);
-            WWW www = new WWW(request.ToString());
+            WWW www;
+
+            if (request.method == Method.POST)
+            {
+                // concatenate headers and parameters
+                Dictionary<string, string> headers = request.postParameters.headers;
+                foreach (KeyValuePair<string, string> kvp in request.headers)
+                {
+                    headers[kvp.Key] = kvp.Value;
+                }
+
+                if (request.data != null)
+                {
+                    www = new WWW(request.ToString(), request.data, headers);
+                }
+                else
+                {
+                    www = new WWW(request.ToString(), request.postParameters.data, headers);
+                }
+            } else
+            {
+                www = new WWW(request.ToString(), null, request.headers);
+            }
             yield return www;
             if (string.IsNullOrEmpty(www.error))
             {

@@ -7,7 +7,7 @@ namespace UnityRest
     {
         public void Add(string name, string value)
         {
-
+            Add(new KeyValuePair<string, string>(name, value));
         }
 
         public override string ToString()
