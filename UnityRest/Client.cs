@@ -53,7 +53,7 @@ namespace UnityRest
             yield return www;
             if (string.IsNullOrEmpty(www.error))
             {
-                done(new Response(www.text), null);
+                done(new Response(www.text, www.responseHeaders), null);
             }
             else
             {
